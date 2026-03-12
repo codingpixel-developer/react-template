@@ -30,16 +30,26 @@ All shared code lives under `src/shared/`. Use `@/shared/` for all imports from 
 
 Load the appropriate skill file for your task. Each file is self-contained and focused.
 
-| Task | Skill file |
-|---|---|
-| Understand project structure, add pages, configure Vite | `.agent/skills/architecture.md` |
-| Use or create UI components (Button, Modal, Input, etc.) | `.agent/skills/components.md` |
-| Apply styles, work with CSS variables, Tailwind, SCSS | `.agent/skills/styling.md` |
-| Implement auth, protect routes, work with tokens/API | `.agent/skills/auth.md` |
-| Add Redux state, create slices, use hooks | `.agent/skills/state.md` |
-| Add images/icons/fonts, use standard image handling | `.agent/skills/assets.md` |
-| Follow naming conventions and component size rules | `.agent/skills/code-standards.md` |
-| Navigate between pages, add new routes, update access control | `.agent/skills/routes.md` |
+| Task                                                          | Skill file                        |
+| ------------------------------------------------------------- | --------------------------------- |
+| Understand project structure, add pages, configure Vite       | `.agent/skills/architecture.md`   |
+| Use or create UI components (Button, Modal, Input, etc.)      | `.agent/skills/components.md`     |
+| Apply styles, work with CSS variables, Tailwind, SCSS         | `.agent/skills/styling.md`        |
+| Implement auth, protect routes, work with tokens/API          | `.agent/skills/auth.md`           |
+| Add Redux state, create slices, use hooks                     | `.agent/skills/state.md`          |
+| Add images/icons/fonts, use standard image handling           | `.agent/skills/assets.md`         |
+| Follow naming conventions and component size rules            | `.agent/skills/code-standards.md` |
+| Navigate between pages, add new routes, update access control | `.agent/skills/routes.md`         |
+
+---
+
+## Prompts
+
+The `.prompts/` folder contains detailed prompts for complex, multi-step tasks. These prompts provide structured workflows and are meant to be used when the user asks for the corresponding feature.
+
+| Task                                           | Prompt file                   |
+| ---------------------------------------------- | ----------------------------- |
+| Build an admin dashboard with multiple screens | `.prompts/admin-dashboard.md` |
 
 ---
 
