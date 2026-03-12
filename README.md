@@ -4,15 +4,15 @@ A production-ready React starter with Vite, TypeScript, Redux Toolkit, Tailwind 
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
+| Layer     | Technology                     |
+| --------- | ------------------------------ |
 | Framework | React 19, TypeScript 5, Vite 7 |
-| Routing | React Router v7 |
-| Styling | Tailwind CSS v4 + SCSS modules |
-| State | Redux Toolkit + redux-persist |
-| Forms | Formik + Yup |
-| HTTP | Axios with token refresh |
-| Build | Vite with Fast Refresh |
+| Routing   | React Router v7                |
+| Styling   | Tailwind CSS v4 + SCSS modules |
+| State     | Redux Toolkit + redux-persist  |
+| Forms     | Formik + Yup                   |
+| HTTP      | Axios with token refresh       |
+| Build     | Vite with Fast Refresh         |
 
 ## Quick Start
 
@@ -31,12 +31,12 @@ The app will be available at `http://localhost:5173/`.
 
 ## Available Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server |
-| `npm run build` | Build for production |
+| Command           | Description              |
+| ----------------- | ------------------------ |
+| `npm run dev`     | Start development server |
+| `npm run build`   | Build for production     |
 | `npm run preview` | Preview production build |
-| `npm run lint` | Run ESLint |
+| `npm run lint`    | Run ESLint               |
 
 ## Project Structure
 
@@ -66,14 +66,17 @@ public/
 ├── icons/                 # SVG icons with index.ts
 ├── images/                # Images with index.ts
 └── fonts/                 # Fonts with index.ts
+
+.prompts/                  # AI prompts for complex tasks
+└── admin-dashboard.md     # Prompt for building admin dashboards
 ```
 
 ## Environment Variables
 
-| Variable | Description |
-|----------|-------------|
-| `VITE_API_BASE_URL` | Base URL for API calls |
-| `NODE_ENV` | Environment (development/production) |
+| Variable            | Description                          |
+| ------------------- | ------------------------------------ |
+| `VITE_API_BASE_URL` | Base URL for API calls               |
+| `NODE_ENV`          | Environment (development/production) |
 
 Copy `.env.sample` to `.env` and adjust values for your setup.
 
@@ -90,9 +93,9 @@ All components use CSS custom properties for theming and support dark mode.
 ### Using Components
 
 ```tsx
-import { Button } from '@/shared/components/ui/button/button';
-import { Input } from '@/shared/components/ui/input/input';
-import { useToast } from '@/shared/components/ui/toast/toast';
+import { Button } from "@/shared/components/ui/button/button";
+import { Input } from "@/shared/components/ui/input/input";
+import { useToast } from "@/shared/components/ui/toast/toast";
 
 function MyComponent() {
   const { addToast } = useToast();
@@ -100,7 +103,7 @@ function MyComponent() {
   return (
     <form>
       <Input label="Email" type="email" />
-      <Button onClick={() => addToast({ title: 'Saved!', variant: 'success' })}>
+      <Button onClick={() => addToast({ title: "Saved!", variant: "success" })}>
         Save
       </Button>
     </form>
@@ -140,8 +143,8 @@ Wrap routes with `ProtectedRoute` for authentication:
 Redux Toolkit with persistence:
 
 ```tsx
-import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/useRedux';
-import { setToken } from '@/shared/lib/store/slices/authSlice';
+import { useAppDispatch, useAppSelector } from "@/shared/lib/hooks/useRedux";
+import { setToken } from "@/shared/lib/store/slices/authSlice";
 
 const dispatch = useAppDispatch();
 const user = useAppSelector((state) => state.user.user);
@@ -152,7 +155,7 @@ const user = useAppSelector((state) => state.user.user);
 Dark mode is handled via CSS custom properties. Toggle with:
 
 ```tsx
-import { useTheme } from '@/shared/lib/hooks/useTheme';
+import { useTheme } from "@/shared/lib/hooks/useTheme";
 
 const { theme, toggleTheme } = useTheme();
 ```
@@ -164,9 +167,9 @@ Theme tokens are defined in `src/index.css`.
 Pre-configured Axios instance with automatic token refresh:
 
 ```ts
-import { apiClient } from '@/shared/lib/api/client';
+import { apiClient } from "@/shared/lib/api/client";
 
-const response = await apiClient.get('/users/me');
+const response = await apiClient.get("/users/me");
 ```
 
 ## Form Validation
@@ -174,8 +177,8 @@ const response = await apiClient.get('/users/me');
 Yup schemas included:
 
 ```tsx
-import { loginSchema } from '@/shared/lib/validations/schemas';
-import { useFormik } from 'formik';
+import { loginSchema } from "@/shared/lib/validations/schemas";
+import { useFormik } from "formik";
 
 const formik = useFormik({
   validationSchema: loginSchema,
@@ -188,10 +191,10 @@ const formik = useFormik({
 All assets go through `index.ts` exports (never hardcode paths):
 
 ```tsx
-import { icons } from '@/public/icons';
-import { images } from '@/public/images';
+import { icons } from "@/public/icons";
+import { images } from "@/public/images";
 
-<img src={icons.vite} alt="Logo" />
+<img src={icons.vite} alt="Logo" />;
 ```
 
 ## Code Standards
