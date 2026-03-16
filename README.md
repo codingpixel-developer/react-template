@@ -47,6 +47,10 @@ src/
 │   ├── dashboard/
 │   └── home/
 ├── shared/
+│   ├── assets/
+│   │   ├── icons/         # SVG icons with index.ts
+│   │   ├── images/        # Images with index.ts
+│   │   └── fonts/         # Fonts with index.ts
 │   ├── components/
 │   │   ├── forms/         # Form components
 │   │   ├── providers/     # Context providers
@@ -62,10 +66,7 @@ src/
 ├── main.tsx               # App entry + providers
 └── index.css              # Global styles + theme tokens
 
-public/
-├── icons/                 # SVG icons with index.ts
-├── images/                # Images with index.ts
-└── fonts/                 # Fonts with index.ts
+public/                    # Static files served at root (favicon, etc.)
 
 .prompts/                  # AI prompts for complex tasks
 └── admin-dashboard.md     # Prompt for building admin dashboards
@@ -188,13 +189,13 @@ const formik = useFormik({
 
 ## Assets
 
-All assets go through `index.ts` exports (never hardcode paths):
+All app assets (icons, images, fonts) live in `src/shared/assets/` and must be exported through their `index.ts`. Only favicons and root-served static files go in `public/`.
 
 ```tsx
-import { icons } from "@/public/icons";
-import { images } from "@/public/images";
+import { icons } from "@/shared/assets/icons";
+import { images } from "@/shared/assets/images";
 
-<img src={icons.vite} alt="Logo" />;
+<img src={icons.logo} alt="Logo" />;
 ```
 
 ## Code Standards
@@ -203,6 +204,7 @@ import { images } from "@/public/images";
 - **Component size**: Max 300-350 lines per file
 - **Imports**: Use `@/` prefix for project imports, never relative `../../`
 - **Routes**: Always use `ROUTES.*` constants, never string literals
+- **Modals & Dialogs**: Always create as separate dedicated components, never inline inside a page
 
 See `.agent/skills/` for detailed coding guidelines.
 

@@ -56,8 +56,9 @@ The `.prompts/` folder contains detailed prompts for complex, multi-step tasks. 
 ## Critical Rules (always apply, regardless of task)
 
 1. **Routes** — Never hardcode route strings. Always use `ROUTES.*` from `src/shared/lib/config/routes.ts`.
-2. **Assets** — Never reference `/public` paths directly. Export from `public/*/index.ts` first.
-3. **Images** — Use standard HTML `<img>` or a custom Image component if available. Never hardcode public paths.
+2. **Assets** — Never reference asset paths directly. All app assets (icons, images, fonts) live in `src/shared/assets/`. Export from `src/shared/assets/*/index.ts` first. Only favicons and static files served at the root go in `public/`.
+3. **Images** — Use standard HTML `<img>` or a custom Image component if available. Always import from `@/shared/assets/`.
 4. **Component size** — Files must not exceed 300–350 lines. Split into sub-components or hooks.
 5. **Naming** — All component folders and files use **camelCase** (e.g., `fileUpload/fileUpload.tsx`).
 6. **Imports** — Always use `@/shared/` prefix for shared code. Never use relative `../../` paths.
+7. **Modals & Dialogs** — Always create modals and dialogs as separate, dedicated components. Never define modal JSX inline inside a page or parent component. Place them in the same feature folder (e.g., `pages/users/deleteUserModal/deleteUserModal.tsx`) or in `src/shared/components/` if reusable.
