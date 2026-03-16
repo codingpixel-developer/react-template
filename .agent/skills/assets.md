@@ -1,19 +1,19 @@
 # Skill: Asset Management
 
-**Read this when:** adding images, icons, or fonts to the project, displaying images in components, or referencing any file from the `public/` folder.
+**Read this when:** adding images, icons, or fonts to the project, displaying images in components, or referencing any asset file.
 
 ---
 
 ## Rule: All Assets Go Through `index.ts`
 
-**CRITICAL:** Never reference asset paths directly as strings in components. Every asset in `public/` must be exported from its folder's `index.ts` first.
+**CRITICAL:** Never reference asset paths directly as strings in components. Every asset in `src/shared/assets/` must be exported from its folder's `index.ts` first.
 
 ---
 
 ## Folder Structure
 
 ```
-public/
+src/shared/assets/
 ├── icons/
 │   ├── index.ts      ← export all icons here
 │   └── *.svg
@@ -23,6 +23,9 @@ public/
 └── fonts/
     ├── index.ts      ← export all fonts here
     └── *.*
+
+public/               ← only favicons and root-served static files
+└── vite.svg
 ```
 
 ---
@@ -32,17 +35,16 @@ public/
 ### Adding an Image
 
 ```typescript
-// Step 1: Place file at public/images/hero-banner.jpg
+// Step 1: Place file at src/shared/assets/images/hero-banner.jpg
 
-// Step 2: Add to public/images/index.ts
+// Step 2: Add to src/shared/assets/images/index.ts
 export const images = {
-  heroBanner: '/images/hero-banner.jpg',
-  profileAvatar: '/images/profile-avatar.png',
-  // ... all other images
+  heroBanner: new URL('./hero-banner.jpg', import.meta.url).href,
+  profileAvatar: new URL('./profile-avatar.png', import.meta.url).href,
 } as const;
 
 // Step 3: Use in component
-import { images } from '@/public/images';
+import { images } from '@/shared/assets/images';
 
 <img src={images.heroBanner} alt="Hero" width={800} height={400} />
 ```
@@ -50,17 +52,16 @@ import { images } from '@/public/images';
 ### Adding an Icon
 
 ```typescript
-// Step 1: Place file at public/icons/close.svg
+// Step 1: Place file at src/shared/assets/icons/close.svg
 
-// Step 2: Add to public/icons/index.ts
+// Step 2: Add to src/shared/assets/icons/index.ts
 export const icons = {
-  close: '/icons/close.svg',
-  search: '/icons/search.svg',
-  // ... all other icons
+  close: new URL('./close.svg', import.meta.url).href,
+  search: new URL('./search.svg', import.meta.url).href,
 } as const;
 
 // Step 3: Use in component
-import { icons } from '@/public/icons';
+import { icons } from '@/shared/assets/icons';
 
 <img src={icons.close} alt="Close" width={24} height={24} />
 ```
@@ -73,7 +74,7 @@ Use standard HTML `<img>` or create a custom Image component if you need additio
 
 ```typescript
 // ✅ Standard HTML img
-import { images } from '@/public/images';
+import { images } from '@/shared/assets/images';
 <img src={images.hero} alt="Hero" width={800} height={400} />
 
 // ✅ With lazy loading
@@ -93,19 +94,14 @@ import { images } from '@/public/images';
 
 ## Vite Asset Handling
 
-Vite provides several features for asset handling:
+Since assets live inside `src/`, Vite processes them automatically:
 
 ```typescript
-// Import asset URL (for dynamic usage)
-import logoUrl from '@/public/images/logo.png';
+// Import asset URL directly (Vite handles hashing + cache busting)
+import logoUrl from '@/shared/assets/images/logo.png';
 
-// Import as string (for inline SVG)
-import logoSvg from '@/public/icons/logo.svg?raw';
-
-// Vite automatically handles:
-// - Hashing for cache busting
-// - Base64 inlining for small assets (< 4KB)
-// - Proper MIME types
+// Import as inline SVG string
+import logoSvg from '@/shared/assets/icons/logo.svg?raw';
 ```
 
 ---
@@ -113,13 +109,13 @@ import logoSvg from '@/public/icons/logo.svg?raw';
 ## Anti-Patterns
 
 ```typescript
-// ❌ Hardcoded path in JSX
+// ❌ Hardcoded path string
 <img src="/images/hero.jpg" />
 
-// ❌ Path string directly without index.ts export
-<img src="/images/hero.jpg" alt="Hero" width={800} height={400} />
+// ❌ Importing from public/ for app assets
+import { images } from '@/public/images';
 
 // ✅ Correct pattern
-import { images } from '@/public/images';
+import { images } from '@/shared/assets/images';
 <img src={images.hero} alt="Hero" width={800} height={400} />
 ```
