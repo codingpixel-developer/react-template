@@ -1,4 +1,4 @@
-# AGENT.md
+# CLAUDE.md
 
 This is the entry point for AI agents working in this repository. Read this file first, then load only the skill file relevant to your current task.
 
