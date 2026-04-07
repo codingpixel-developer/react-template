@@ -4,17 +4,17 @@
 
 ---
 
-## Before Anything Else — Read `Agent.md`
+## Before Anything Else — Read `CLAUDE.md`
 
-**The very first action** the agent must take is to read `Agent.md` from the project root:
+**The very first action** the agent must take is to read `CLAUDE.md` from the project root:
 
 ```
-Agent.md    ← read this first, before any code, before any questions
+CLAUDE.md    ← read this first, before any code, before any questions
 ```
 
-`Agent.md` contains the general project overview, the full list of available skills, project-wide rules, and conventions the agent must follow throughout this task. Everything in `Agent.md` takes precedence over any defaults in this prompt.
+`CLAUDE.md` contains the general project overview, the full list of available skills, project-wide rules, and conventions the agent must follow throughout this task. Everything in `CLAUDE.md` takes precedence over any defaults in this prompt.
 
-Only after reading and internalizing `Agent.md` should the agent proceed to Step 1 below.
+Only after reading and internalizing `CLAUDE.md` should the agent proceed to Step 1 below.
 
 ---
 
