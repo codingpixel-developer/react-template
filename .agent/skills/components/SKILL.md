@@ -1,6 +1,9 @@
-# Skill: UI Components
+---
+name: components
+description: Use when using any existing UI component, building a new UI component, or understanding component patterns and conventions.
+---
 
-**Read this when:** using any existing UI component, building a new UI component, or understanding component patterns and conventions.
+# Skill: UI Components
 
 ---
 

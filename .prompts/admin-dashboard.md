@@ -158,6 +158,7 @@ Get user approval on the plan before proceeding.
 - Use `cva` + `tailwind-merge` for new variant-based components if the project already uses this pattern — check skills files first
 - Design tokens: prefer Tailwind config custom values (e.g. `bg-accent`) over raw CSS variables, unless the project uses CSS custom properties — follow whatever the skills files document
 - Folder structure, file naming, and import aliases must match `.agent/skills/project.md` exactly
+- **Icons:** Check `.agent/rules/assets/SKILL.md` for available icon assets first. If no icon assets exist in the project, use `lucide-react` for all icons — never use text emojis as icon substitutes
 
 ### Design System (Minimalist Modern)
 
