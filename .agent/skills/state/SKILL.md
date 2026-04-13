@@ -1,6 +1,9 @@
-# Skill: State Management
+---
+name: state
+description: Use when adding Redux state, creating new slices, reading/dispatching from components, working with persisted state, or using global hooks.
+---
 
-**Read this when:** adding Redux state, creating new slices, reading/dispatching from components, working with persisted state, or using global hooks.
+# Skill: State Management
 
 ---
 
@@ -124,4 +127,4 @@ export default yourSlice.reducer;
 
 Wraps the entire app in `src/main.tsx`. No changes needed unless adding a new persist config.
 
-> redux-persist uses `localStorage` by default. Cookie-based auth tokens use `storage.ts` utilities instead (see `.agent/skills/auth.md`).
+> redux-persist uses `localStorage` by default. Cookie-based auth tokens use `storage.ts` utilities instead (see `.agent/skills/auth/SKILL.md`).

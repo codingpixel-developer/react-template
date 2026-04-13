@@ -1,6 +1,9 @@
-# Skill: Styling System
+---
+name: styling
+description: Use when adding styles to components, creating SCSS modules, working with dark mode, using CSS custom properties, or extending the theme.
+---
 
-**Read this when:** adding styles to components, creating SCSS modules, working with dark mode, using CSS custom properties, or extending the theme.
+# Skill: Styling System
 
 ---
 

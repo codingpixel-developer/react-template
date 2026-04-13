@@ -1,12 +1,17 @@
-# Skill: Asset Management
+---
+name: assets
+description: Rules for asset management — adding images, icons, and fonts. Never reference asset paths directly; always export from index.ts first.
+---
 
-**Read this when:** adding images, icons, or fonts to the project, displaying images in components, or referencing any asset file.
+# Rules: Asset Management
 
 ---
 
 ## Rule: All Assets Go Through `index.ts`
 
 **CRITICAL:** Never reference asset paths directly as strings in components. Every asset in `src/shared/assets/` must be exported from its folder's `index.ts` first.
+
+The `public/` folder is **only** for files served at the root URL (e.g. `favicon.ico`). Do not place app assets there.
 
 ---
 
@@ -70,7 +75,7 @@ import { icons } from '@/shared/assets/icons';
 
 ## Using Images in Components
 
-Use standard HTML `<img>` or create a custom Image component if you need additional features:
+Use standard HTML `<img>` or a custom Image component:
 
 ```typescript
 // ✅ Standard HTML img

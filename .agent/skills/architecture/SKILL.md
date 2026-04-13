@@ -1,6 +1,9 @@
-# Skill: Project Architecture
+---
+name: architecture
+description: Use when setting up new pages/routes, understanding folder structure, configuring Vite, adding new path aliases, or navigating the codebase for the first time.
+---
 
-**Read this when:** setting up new pages/routes, understanding folder structure, configuring Vite, adding new path aliases, or navigating the codebase for the first time.
+# Skill: Project Architecture
 
 ---
 

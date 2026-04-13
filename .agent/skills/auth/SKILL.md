@@ -1,6 +1,9 @@
-# Skill: Authentication Architecture
+---
+name: auth
+description: Use when implementing login/logout, protecting routes, working with tokens, modifying route protection, handling API auth errors, or adding new protected/public pages.
+---
 
-**Read this when:** implementing login/logout, protecting routes, working with tokens, modifying route protection, handling API auth errors, or adding new protected/public pages.
+# Skill: Authentication Architecture
 
 ---
 
@@ -23,7 +26,7 @@ Located at `src/shared/components/providers/ProtectedRoute.tsx`.
 - Authenticated user on an auth route (e.g., `/login`) → redirect to `/dashboard`
 - All other cases → render children
 
-**To change protection rules:** modify `PROTECTED_ROUTES` and `AUTH_ROUTES` in `src/shared/lib/config/routes.ts` (see `.agent/skills/routes.md`).
+**To change protection rules:** modify `PROTECTED_ROUTES` and `AUTH_ROUTES` in `src/shared/lib/config/routes.ts` (see `.agent/skills/routes/SKILL.md`).
 
 ```tsx
 // Usage in App.tsx

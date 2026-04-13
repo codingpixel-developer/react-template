@@ -1,6 +1,9 @@
-# Skill: Code Standards
+---
+name: code-standards
+description: Rules for component size, naming conventions, file structure, TypeScript strictness, and no magic strings. Apply when creating any component, naming files, or reviewing code.
+---
 
-**Read this when:** creating any new component, refactoring existing components, naming files or folders, or reviewing code for consistency.
+# Rules: Code Standards
 
 ---
 
@@ -67,7 +70,7 @@ import { useState } from 'react';
 
 // 2. Internal imports (styles last)
 import { ROUTES } from '@/shared/lib/config/routes';
-import { images } from '@/public/images';
+import { images } from '@/shared/assets/images';
 import styles from './componentName.module.scss';
 
 // 3. TypeScript interface
@@ -127,8 +130,34 @@ className={`${styles.button} ${styles[`button--${variant}`]} ${disabled ? styles
 
 ---
 
+## Rule 7: Keep Functions Short — Split Instead of Branching
+
+If a function is growing long due to `if/else` or conditional logic, split it into separate focused functions rather than one long branching function.
+
+```typescript
+// ❌ One long function with branches
+const handleSubmit = async (type: 'create' | 'update') => {
+  if (type === 'create') {
+    // 20 lines of create logic
+  } else {
+    // 20 lines of update logic
+  }
+};
+
+// ✅ Two focused functions
+const handleCreate = async () => {
+  // create logic only
+};
+
+const handleUpdate = async () => {
+  // update logic only
+};
+```
+
+---
+
 ## Rule 6: No Magic Strings
 
-- Route strings → always use `ROUTES.*` (see `.agent/skills/routes.md`)
-- Asset paths → always use `images.*` / `icons.*` (see `.agent/skills/assets.md`)
+- Route strings → always use `ROUTES.*` (see `.agent/skills/routes/SKILL.md`)
+- Asset paths → always use `images.*` / `icons.*` (see `.agent/rules/assets/SKILL.md`)
 - API endpoints → define as constants, not inline strings
