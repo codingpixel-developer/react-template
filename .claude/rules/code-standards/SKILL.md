@@ -158,6 +158,6 @@ const handleUpdate = async () => {
 
 ## Rule 6: No Magic Strings
 
-- Route strings → always use `ROUTES.*` (see `.agent/skills/routes/SKILL.md`)
-- Asset paths → always use `images.*` / `icons.*` (see `.agent/rules/assets/SKILL.md`)
+- Route strings → always use `ROUTES.*` (see `.claude/skills/routes/SKILL.md`)
+- Asset paths → always use `images.*` / `icons.*` (see `.claude/rules/assets/SKILL.md`)
 - API endpoints → define as constants, not inline strings

@@ -127,4 +127,4 @@ export default yourSlice.reducer;
 
 Wraps the entire app in `src/main.tsx`. No changes needed unless adding a new persist config.
 
-> redux-persist uses `localStorage` by default. Cookie-based auth tokens use `storage.ts` utilities instead (see `.agent/skills/auth/SKILL.md`).
+> redux-persist uses `localStorage` by default. Cookie-based auth tokens use `storage.ts` utilities instead (see `.claude/skills/auth/SKILL.md`).

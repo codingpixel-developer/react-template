@@ -26,7 +26,7 @@ Located at `src/shared/components/providers/ProtectedRoute.tsx`.
 - Authenticated user on an auth route (e.g., `/login`) → redirect to `/dashboard`
 - All other cases → render children
 
-**To change protection rules:** modify `PROTECTED_ROUTES` and `AUTH_ROUTES` in `src/shared/lib/config/routes.ts` (see `.agent/skills/routes/SKILL.md`).
+**To change protection rules:** modify `PROTECTED_ROUTES` and `AUTH_ROUTES` in `src/shared/lib/config/routes.ts` (see `.claude/skills/routes/SKILL.md`).
 
 ```tsx
 // Usage in App.tsx

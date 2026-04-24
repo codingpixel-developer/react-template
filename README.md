@@ -206,7 +206,7 @@ import { images } from "@/shared/assets/images";
 - **Routes**: Always use `ROUTES.*` constants, never string literals
 - **Modals & Dialogs**: Always create as separate dedicated components, never inline inside a page
 
-See `.agent/skills/` for detailed coding guidelines.
+See `.claude/skills/` for detailed coding guidelines.
 
 ## License
 
