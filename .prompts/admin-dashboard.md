@@ -71,7 +71,7 @@ The following are **fixed** for this project. The agent must not ask the user ab
 | **Framework**                 | React.js (no SSR/Next.js unless explicitly told)                                                         |
 | **Styling**                   | Tailwind CSS                                                                                             |
 | **Component approach**        | Reuse existing components first; create new custom components only when needed for the requested screens |
-| **Skills/conventions source** | `.agent/skills/` folder in the project root                                                              |
+| **Skills/conventions source** | `.claude/skills/` folder in the project root                                                              |
 
 #### Reading the Skills Folder
 
@@ -79,18 +79,18 @@ The following are **fixed** for this project. The agent must not ask the user ab
 
 | Task                                                          | Skill file                        |
 | ------------------------------------------------------------- | --------------------------------- |
-| Understand project structure, add pages, configure Vite       | `.agent/skills/architecture.md`   |
-| Use or create UI components (Button, Modal, Input, etc.)      | `.agent/skills/components.md`     |
-| Apply styles, work with CSS variables, Tailwind, SCSS         | `.agent/skills/styling.md`        |
-| Implement auth, protect routes, work with tokens/API          | `.agent/skills/auth.md`           |
-| Add Redux state, create slices, use hooks                     | `.agent/skills/state.md`          |
-| Add images/icons/fonts, use standard image handling           | `.agent/skills/assets.md`         |
-| Follow naming conventions and component size rules            | `.agent/skills/code-standards.md` |
-| Navigate between pages, add new routes, update access control | `.agent/skills/routes.md`         |
+| Understand project structure, add pages, configure Vite       | `.claude/skills/architecture.md`   |
+| Use or create UI components (Button, Modal, Input, etc.)      | `.claude/skills/components.md`     |
+| Apply styles, work with CSS variables, Tailwind, SCSS         | `.claude/skills/styling.md`        |
+| Implement auth, protect routes, work with tokens/API          | `.claude/skills/auth.md`           |
+| Add Redux state, create slices, use hooks                     | `.claude/skills/state.md`          |
+| Add images/icons/fonts, use standard image handling           | `.claude/skills/assets.md`         |
+| Follow naming conventions and component size rules            | `.claude/skills/code-standards.md` |
+| Navigate between pages, add new routes, update access control | `.claude/skills/routes.md`         |
 
 **How to use the skills folder:**
 
-1. Read every `.md` file in `.agent/skills/` at the start of the task
+1. Read every `.md` file in `.claude/skills/` at the start of the task
 2. Use the existing component catalogue to identify what already exists before building anything new
 3. Match the folder structure, file naming, and import path conventions exactly as documented
 4. Respect any custom Tailwind config (custom colors, spacing, plugins) found in `styling.md` or `tailwind.config.js`
@@ -146,19 +146,19 @@ Get user approval on the plan before proceeding.
 
 **Before building anything:**
 
-- Re-read `.agent/skills/` files to confirm folder structure and conventions
+- Re-read `.claude/skills/` files to confirm folder structure and conventions
 - Check the existing components catalogue — do not rebuild what already exists
 - Check `tailwind.config.js` for custom colors/tokens before adding CSS variables
 
 **General rules:**
 
 - Extend existing components via props/composition before creating new ones
-- New components go in the folder documented in `.agent/skills/project.md`
+- New components go in the folder documented in `.claude/skills/project.md`
 - Use `clsx` or `cn()` (whichever the project uses) for conditional class merging
 - Use `cva` + `tailwind-merge` for new variant-based components if the project already uses this pattern — check skills files first
 - Design tokens: prefer Tailwind config custom values (e.g. `bg-accent`) over raw CSS variables, unless the project uses CSS custom properties — follow whatever the skills files document
-- Folder structure, file naming, and import aliases must match `.agent/skills/project.md` exactly
-- **Icons:** Check `.agent/rules/assets/SKILL.md` for available icon assets first. If no icon assets exist in the project, use `lucide-react` for all icons — never use text emojis as icon substitutes
+- Folder structure, file naming, and import aliases must match `.claude/skills/project.md` exactly
+- **Icons:** Check `.claude/rules/assets/SKILL.md` for available icon assets first. If no icon assets exist in the project, use `lucide-react` for all icons — never use text emojis as icon substitutes
 
 ### Design System (Minimalist Modern)
 
@@ -387,13 +387,13 @@ Respect `prefers-reduced-motion` — disable continuous animations, keep structu
 
 When writing code, follow this order:
 
-1. **Read `.agent/skills/`** — confirm existing components and folder structure before touching anything
+1. **Read `.claude/skills/`** — confirm existing components and folder structure before touching anything
 2. **Layout shell** — only build `DashboardShell`, `Sidebar`, `Topbar` if they don't already exist in the project
 3. **Shared components** — reuse existing ones; build new ones (StatCard, DataTable, Badge, Chart wrapper) only if missing
 4. **Each screen** — one at a time, in the order the user prioritized them
 5. **After each screen** — pause and ask: _"Happy with this? Should I adjust anything before the next screen?"_
 
-All files are `.jsx` (or `.tsx` if the project uses TypeScript — check skills files). File names and folder placement must match `.agent/skills/project.md`.
+All files are `.jsx` (or `.tsx` if the project uses TypeScript — check skills files). File names and folder placement must match `.claude/skills/project.md`.
 
 When creating a new component, briefly note:
 
