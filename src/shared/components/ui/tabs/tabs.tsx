@@ -23,7 +23,12 @@ interface TabsProps {
   onChange?: (tabId: string) => void;
 }
 
-export const Tabs = ({ children, defaultTab, className = '', onChange }: TabsProps) => {
+export const Tabs = ({
+  children,
+  defaultTab,
+  className = '',
+  onChange,
+}: TabsProps) => {
   const [activeTab, setActiveTab] = useState(defaultTab || '');
 
   const handleSetActiveTab = (id: string) => {
@@ -32,7 +37,9 @@ export const Tabs = ({ children, defaultTab, className = '', onChange }: TabsPro
   };
 
   return (
-    <TabsContext.Provider value={{ activeTab, setActiveTab: handleSetActiveTab }}>
+    <TabsContext.Provider
+      value={{ activeTab, setActiveTab: handleSetActiveTab }}
+    >
       <div className={`${styles.tabs} ${className}`}>{children}</div>
     </TabsContext.Provider>
   );
@@ -44,7 +51,11 @@ interface TabListProps {
 }
 
 export const TabList = ({ children, className = '' }: TabListProps) => {
-  return <div className={`${styles['tab-list']} ${className}`} role="tablist">{children}</div>;
+  return (
+    <div className={`${styles['tab-list']} ${className}`} role="tablist">
+      {children}
+    </div>
+  );
 };
 
 interface TabProps {
@@ -54,7 +65,12 @@ interface TabProps {
   className?: string;
 }
 
-export const Tab = ({ id, children, disabled = false, className = '' }: TabProps) => {
+export const Tab = ({
+  id,
+  children,
+  disabled = false,
+  className = '',
+}: TabProps) => {
   const { activeTab, setActiveTab } = useTabs();
   const isActive = activeTab === id;
 

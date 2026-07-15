@@ -12,10 +12,12 @@ export function useAuth() {
 
   const login = useCallback(
     async (tokenValue: string, refreshTokenValue: string, userData: User) => {
-      dispatch(setToken({ token: tokenValue, refreshToken: refreshTokenValue }));
+      dispatch(
+        setToken({ token: tokenValue, refreshToken: refreshTokenValue }),
+      );
       dispatch(setUser(userData));
     },
-    [dispatch]
+    [dispatch],
   );
 
   const logout = useCallback(() => {

@@ -11,6 +11,7 @@ npm run dev       # Dev server at localhost:5173 (Vite)
 npm run build     # Production build
 npm run preview   # Preview production build
 npm run lint      # ESLint check
+npm run format    # Format with Prettier
 ```
 
 ---

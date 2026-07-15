@@ -28,7 +28,7 @@ export const Modal = ({
         onClose();
       }
     },
-    [closeOnEscape, onClose]
+    [closeOnEscape, onClose],
   );
 
   useEffect(() => {
@@ -60,7 +60,9 @@ export const Modal = ({
   return (
     <div className={styles['modal-overlay']} onClick={handleOverlayClick}>
       <div
-        className={[styles.modal, styles[`modal--${size}`], className].filter(Boolean).join(' ')}
+        className={[styles.modal, styles[`modal--${size}`], className]
+          .filter(Boolean)
+          .join(' ')}
         role="dialog"
         aria-modal="true"
       >
@@ -95,7 +97,9 @@ export const ModalHeader = ({
   }
 
   return (
-    <div className={[styles['modal-header'], className].filter(Boolean).join(' ')}>
+    <div
+      className={[styles['modal-header'], className].filter(Boolean).join(' ')}
+    >
       <div className={styles['modal-header-left']}>
         {showBack && (
           <button
@@ -104,7 +108,13 @@ export const ModalHeader = ({
             onClick={onBack}
             aria-label="Go back"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <path
                 d="M15 18L9 12L15 6"
                 stroke="currentColor"
@@ -125,7 +135,13 @@ export const ModalHeader = ({
           onClick={onClose}
           aria-label="Close modal"
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
             <path
               d="M18 6L6 18"
               stroke="currentColor"
@@ -152,9 +168,14 @@ interface ModalContentProps {
   className?: string;
 }
 
-export const ModalContent = ({ children, className = '' }: ModalContentProps) => {
+export const ModalContent = ({
+  children,
+  className = '',
+}: ModalContentProps) => {
   return (
-    <div className={[styles['modal-content'], className].filter(Boolean).join(' ')}>
+    <div
+      className={[styles['modal-content'], className].filter(Boolean).join(' ')}
+    >
       {children}
     </div>
   );
@@ -172,7 +193,9 @@ export const ModalFooter = ({ children, className = '' }: ModalFooterProps) => {
   }
 
   return (
-    <div className={[styles['modal-footer'], className].filter(Boolean).join(' ')}>
+    <div
+      className={[styles['modal-footer'], className].filter(Boolean).join(' ')}
+    >
       {children}
     </div>
   );

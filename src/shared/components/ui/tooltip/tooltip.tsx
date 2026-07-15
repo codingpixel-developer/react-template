@@ -62,7 +62,9 @@ export const Tooltip = ({
           role="tooltip"
         >
           <div className={styles['tooltip-inner']}>{content}</div>
-          <span className={`${styles['tooltip-arrow']} ${styles[`tooltip-arrow--${position}`]}`} />
+          <span
+            className={`${styles['tooltip-arrow']} ${styles[`tooltip-arrow--${position}`]}`}
+          />
         </div>
       )}
     </div>

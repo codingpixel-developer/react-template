@@ -56,7 +56,9 @@ export const PhoneInput = ({
       {label && (
         <label htmlFor={inputId} className={styles['phone-input-label']}>
           {label}
-          {required && <span className={styles['phone-input-required']}>*</span>}
+          {required && (
+            <span className={styles['phone-input-required']}>*</span>
+          )}
         </label>
       )}
       <div className={styles['phone-input-container']}>
@@ -75,12 +77,20 @@ export const PhoneInput = ({
           className={styles['phone-input']}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={
-            error ? `${inputId}-error` : helperText ? `${inputId}-helper` : undefined
+            error
+              ? `${inputId}-error`
+              : helperText
+                ? `${inputId}-helper`
+                : undefined
           }
         />
       </div>
       {error && (
-        <span id={`${inputId}-error`} className={styles['phone-input-error']} role="alert">
+        <span
+          id={`${inputId}-error`}
+          className={styles['phone-input-error']}
+          role="alert"
+        >
           {error}
         </span>
       )}

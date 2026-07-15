@@ -29,8 +29,12 @@ export function DashboardPage() {
       <main className={styles.main}>
         <div className={styles.welcomeCard}>
           <h2>Welcome back{user?.name ? `, ${user.name}` : ''}!</h2>
-          <p>You are signed in as <strong>{user?.email || 'user'}</strong>.</p>
-          <p className={styles.hint}>This is a protected page. Only authenticated users can see this.</p>
+          <p>
+            You are signed in as <strong>{user?.email || 'user'}</strong>.
+          </p>
+          <p className={styles.hint}>
+            This is a protected page. Only authenticated users can see this.
+          </p>
         </div>
       </main>
     </div>
