@@ -8,7 +8,7 @@ This is the entry point for AI agents working in this repository. Read this file
 
 ```bash
 npm run dev       # Dev server at localhost:5173 (Vite)
-npm run build     # Production build
+npm run build     # Production build (also emits pre-compressed .gz assets)
 npm run preview   # Preview production build
 npm run lint      # ESLint check
 npm run format    # Format with Prettier
