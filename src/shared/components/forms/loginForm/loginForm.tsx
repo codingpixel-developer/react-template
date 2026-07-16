@@ -24,6 +24,8 @@ export function LoginForm({ callbackUrl }: LoginFormProps) {
       rememberMe: false,
     },
     validationSchema: loginSchema,
+    // Validate on blur and submit only, not on every keystroke.
+    validateOnChange: false,
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       try {
         const mockToken =
