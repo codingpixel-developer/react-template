@@ -27,7 +27,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       disabled,
       ...props
     },
-    ref
+    ref,
   ) => {
     const buttonClasses = [
       styles.button,
@@ -48,12 +48,16 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {isLoading && <span className={styles.spinner} />}
-        {!isLoading && leftIcon && <span className={styles.leftIcon}>{leftIcon}</span>}
+        {!isLoading && leftIcon && (
+          <span className={styles.leftIcon}>{leftIcon}</span>
+        )}
         {children}
-        {!isLoading && rightIcon && <span className={styles.rightIcon}>{rightIcon}</span>}
+        {!isLoading && rightIcon && (
+          <span className={styles.rightIcon}>{rightIcon}</span>
+        )}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';

@@ -14,6 +14,15 @@ A production-ready React starter with Vite, TypeScript, Redux Toolkit, Tailwind 
 | HTTP      | Axios with token refresh       |
 | Build     | Vite with Fast Refresh         |
 
+## Features
+
+- **TanStack Query** — server-state data fetching/caching (`QueryClientProvider` wired in `main.tsx`)
+- **Error boundary** — app-wide `ErrorBoundary` with a reusable fallback (`ErrorFallback`)
+- **Code splitting** — route pages are lazy-loaded (`React.lazy` + `Suspense`), each shipped as its own chunk
+- **Compressed build** — production build emits pre-compressed `.gz` assets (`vite-plugin-compression2`)
+- **Forms** — Formik + Yup, validating on blur (`validateOnChange: false`)
+- **Tooling** — Husky git hooks (lint-staged + Prettier on pre-commit, commitlint on commit-msg, build on pre-push)
+
 ## Quick Start
 
 ```bash
@@ -94,9 +103,9 @@ All components use CSS custom properties for theming and support dark mode.
 ### Using Components
 
 ```tsx
-import { Button } from "@/shared/components/ui/button/button";
-import { Input } from "@/shared/components/ui/input/input";
-import { useToast } from "@/shared/components/ui/toast/toast";
+import { Button } from '@/shared/components/ui/button/button';
+import { Input } from '@/shared/components/ui/input/input';
+import { useToast } from '@/shared/components/ui/toast/toast';
 
 function MyComponent() {
   const { addToast } = useToast();
@@ -104,7 +113,7 @@ function MyComponent() {
   return (
     <form>
       <Input label="Email" type="email" />
-      <Button onClick={() => addToast({ title: "Saved!", variant: "success" })}>
+      <Button onClick={() => addToast({ title: 'Saved!', variant: 'success' })}>
         Save
       </Button>
     </form>
@@ -144,8 +153,8 @@ Wrap routes with `ProtectedRoute` for authentication:
 Redux Toolkit with persistence:
 
 ```tsx
-import { useAppDispatch, useAppSelector } from "@/shared/lib/hooks/useRedux";
-import { setToken } from "@/shared/lib/store/slices/authSlice";
+import { useAppDispatch, useAppSelector } from '@/shared/lib/hooks/useRedux';
+import { setToken } from '@/shared/lib/store/slices/authSlice';
 
 const dispatch = useAppDispatch();
 const user = useAppSelector((state) => state.user.user);
@@ -156,7 +165,7 @@ const user = useAppSelector((state) => state.user.user);
 Dark mode is handled via CSS custom properties. Toggle with:
 
 ```tsx
-import { useTheme } from "@/shared/lib/hooks/useTheme";
+import { useTheme } from '@/shared/lib/hooks/useTheme';
 
 const { theme, toggleTheme } = useTheme();
 ```
@@ -168,9 +177,9 @@ Theme tokens are defined in `src/index.css`.
 Pre-configured Axios instance with automatic token refresh:
 
 ```ts
-import { apiClient } from "@/shared/lib/api/client";
+import { apiClient } from '@/shared/lib/api/client';
 
-const response = await apiClient.get("/users/me");
+const response = await apiClient.get('/users/me');
 ```
 
 ## Form Validation
@@ -178,8 +187,8 @@ const response = await apiClient.get("/users/me");
 Yup schemas included:
 
 ```tsx
-import { loginSchema } from "@/shared/lib/validations/schemas";
-import { useFormik } from "formik";
+import { loginSchema } from '@/shared/lib/validations/schemas';
+import { useFormik } from 'formik';
 
 const formik = useFormik({
   validationSchema: loginSchema,
@@ -192,8 +201,8 @@ const formik = useFormik({
 All app assets (icons, images, fonts) live in `src/shared/assets/` and must be exported through their `index.ts`. Only favicons and root-served static files go in `public/`.
 
 ```tsx
-import { icons } from "@/shared/assets/icons";
-import { images } from "@/shared/assets/images";
+import { icons } from '@/shared/assets/icons';
+import { images } from '@/shared/assets/images';
 
 <img src={icons.logo} alt="Logo" />;
 ```

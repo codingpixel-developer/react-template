@@ -41,7 +41,10 @@ export const Dropdown = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         handleClose();
       }
     };
@@ -69,7 +72,10 @@ export const Dropdown = ({
         {trigger}
       </div>
       {isOpen && (
-        <div className={`${styles['dropdown-menu']} ${styles[`dropdown-menu--${align}`]}`} role="menu">
+        <div
+          className={`${styles['dropdown-menu']} ${styles[`dropdown-menu--${align}`]}`}
+          role="menu"
+        >
           {children}
         </div>
       )}
@@ -102,9 +108,13 @@ export const DropdownItem = ({
 
   return (
     <button type="button" className={itemClasses} role="menuitem" {...props}>
-      {leftIcon && <span className={styles['dropdown-item-left']}>{leftIcon}</span>}
+      {leftIcon && (
+        <span className={styles['dropdown-item-left']}>{leftIcon}</span>
+      )}
       <span className={styles['dropdown-item-content']}>{children}</span>
-      {rightIcon && <span className={styles['dropdown-item-right']}>{rightIcon}</span>}
+      {rightIcon && (
+        <span className={styles['dropdown-item-right']}>{rightIcon}</span>
+      )}
     </button>
   );
 };
@@ -114,7 +124,12 @@ interface DropdownDividerProps {
 }
 
 export const DropdownDivider = ({ className = '' }: DropdownDividerProps) => {
-  return <div className={`${styles['dropdown-divider']} ${className}`} role="separator" />;
+  return (
+    <div
+      className={`${styles['dropdown-divider']} ${className}`}
+      role="separator"
+    />
+  );
 };
 
 interface DropdownHeaderProps {
@@ -122,8 +137,15 @@ interface DropdownHeaderProps {
   className?: string;
 }
 
-export const DropdownHeader = ({ children, className = '' }: DropdownHeaderProps) => {
-  return <div className={`${styles['dropdown-header']} ${className}`}>{children}</div>;
+export const DropdownHeader = ({
+  children,
+  className = '',
+}: DropdownHeaderProps) => {
+  return (
+    <div className={`${styles['dropdown-header']} ${className}`}>
+      {children}
+    </div>
+  );
 };
 
 // Attach sub-components

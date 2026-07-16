@@ -17,9 +17,7 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const themeValue = useThemeHook();
 
   return (
-    <ThemeContext.Provider value={themeValue}>
-      {children}
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={themeValue}>{children}</ThemeContext.Provider>
   );
 };
 

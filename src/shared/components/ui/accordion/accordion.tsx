@@ -36,16 +36,20 @@ export const Accordion = ({
     (id: string) => {
       setExpandedItems((prev) => {
         if (allowMultiple) {
-          return prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id];
+          return prev.includes(id)
+            ? prev.filter((item) => item !== id)
+            : [...prev, id];
         }
         return prev.includes(id) ? [] : [id];
       });
     },
-    [allowMultiple]
+    [allowMultiple],
   );
 
   return (
-    <AccordionContext.Provider value={{ expandedItems, toggleItem, allowMultiple }}>
+    <AccordionContext.Provider
+      value={{ expandedItems, toggleItem, allowMultiple }}
+    >
       <div className={`${styles.accordion} ${className}`}>{children}</div>
     </AccordionContext.Provider>
   );
@@ -57,9 +61,16 @@ interface AccordionItemProps {
   className?: string;
 }
 
-export const AccordionItem = ({ id, children, className = '' }: AccordionItemProps) => {
+export const AccordionItem = ({
+  id,
+  children,
+  className = '',
+}: AccordionItemProps) => {
   return (
-    <div className={`${styles['accordion-item']} ${className}`} data-item-id={id}>
+    <div
+      className={`${styles['accordion-item']} ${className}`}
+      data-item-id={id}
+    >
       {children}
     </div>
   );
@@ -70,7 +81,10 @@ interface AccordionTriggerProps {
   className?: string;
 }
 
-export const AccordionTrigger = ({ children, className = '' }: AccordionTriggerProps) => {
+export const AccordionTrigger = ({
+  children,
+  className = '',
+}: AccordionTriggerProps) => {
   const { expandedItems, toggleItem } = useAccordion();
   const itemId = React.useContext(ItemIdContext);
   const isExpanded = expandedItems.includes(itemId);
@@ -83,9 +97,23 @@ export const AccordionTrigger = ({ children, className = '' }: AccordionTriggerP
       aria-expanded={isExpanded}
     >
       {children}
-      <span className={`${styles['accordion-icon']} ${isExpanded ? styles['accordion-icon--expanded'] : ''}`}>
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <span
+        className={`${styles['accordion-icon']} ${isExpanded ? styles['accordion-icon--expanded'] : ''}`}
+      >
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M2.5 4.5L6 8L9.5 4.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </span>
     </button>
@@ -99,7 +127,10 @@ interface AccordionContentProps {
 
 const ItemIdContext = createContext<string>('');
 
-export const AccordionContent = ({ children, className = '' }: AccordionContentProps) => {
+export const AccordionContent = ({
+  children,
+  className = '',
+}: AccordionContentProps) => {
   const { expandedItems } = useAccordion();
   const itemId = React.useContext(ItemIdContext);
   const isExpanded = expandedItems.includes(itemId);
@@ -115,7 +146,11 @@ export const AccordionContent = ({ children, className = '' }: AccordionContentP
 };
 
 // Wrapper to provide item id context
-export const AccordionItemWithContext = ({ id, children, className = '' }: AccordionItemProps) => {
+export const AccordionItemWithContext = ({
+  id,
+  children,
+  className = '',
+}: AccordionItemProps) => {
   return (
     <ItemIdContext.Provider value={id}>
       <AccordionItem id={id} className={className}>

@@ -27,7 +27,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       onChange,
       ...props
     },
-    ref
+    ref,
   ) => {
     const generatedId = useId();
     const textareaId = id || generatedId;
@@ -47,7 +47,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         {label && (
           <label htmlFor={textareaId} className={styles['textarea-label']}>
             {label}
-            {props.required && <span className={styles['textarea-required']}>*</span>}
+            {props.required && (
+              <span className={styles['textarea-required']}>*</span>
+            )}
           </label>
         )}
         <textarea
@@ -58,7 +60,11 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           className={textareaClasses}
           aria-invalid={error ? 'true' : 'false'}
           aria-describedby={
-            error ? `${textareaId}-error` : helperText ? `${textareaId}-helper` : undefined
+            error
+              ? `${textareaId}-error`
+              : helperText
+                ? `${textareaId}-helper`
+                : undefined
           }
           value={value}
           onChange={onChange}
@@ -68,7 +74,9 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           {(error || helperText) && (
             <span
               id={error ? `${textareaId}-error` : `${textareaId}-helper`}
-              className={error ? styles['textarea-error'] : styles['textarea-helper']}
+              className={
+                error ? styles['textarea-error'] : styles['textarea-helper']
+              }
               role={error ? 'alert' : undefined}
             >
               {error || helperText}
@@ -82,7 +90,7 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 TextArea.displayName = 'TextArea';

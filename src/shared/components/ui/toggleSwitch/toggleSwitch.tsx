@@ -1,7 +1,10 @@
 import React, { useId, forwardRef } from 'react';
 import styles from './toggleSwitch.module.scss';
 
-interface ToggleSwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
+interface ToggleSwitchProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  'type' | 'size'
+> {
   label?: string;
   error?: string;
   helperText?: string;
@@ -9,7 +12,19 @@ interface ToggleSwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
 }
 
 export const ToggleSwitch = forwardRef<HTMLInputElement, ToggleSwitchProps>(
-  ({ label, error, helperText, size = 'md', className = '', id, disabled, ...props }, ref) => {
+  (
+    {
+      label,
+      error,
+      helperText,
+      size = 'md',
+      className = '',
+      id,
+      disabled,
+      ...props
+    },
+    ref,
+  ) => {
     const generatedId = useId();
     const switchId = id || generatedId;
 
@@ -34,7 +49,11 @@ export const ToggleSwitch = forwardRef<HTMLInputElement, ToggleSwitchProps>(
               disabled={disabled}
               aria-invalid={error ? 'true' : 'false'}
               aria-describedby={
-                error ? `${switchId}-error` : helperText ? `${switchId}-helper` : undefined
+                error
+                  ? `${switchId}-error`
+                  : helperText
+                    ? `${switchId}-helper`
+                    : undefined
               }
               {...props}
             />
@@ -45,7 +64,11 @@ export const ToggleSwitch = forwardRef<HTMLInputElement, ToggleSwitchProps>(
           {label && <span className={styles['toggle-text']}>{label}</span>}
         </label>
         {error && (
-          <span id={`${switchId}-error`} className={styles['toggle-error']} role="alert">
+          <span
+            id={`${switchId}-error`}
+            className={styles['toggle-error']}
+            role="alert"
+          >
             {error}
           </span>
         )}
@@ -56,7 +79,7 @@ export const ToggleSwitch = forwardRef<HTMLInputElement, ToggleSwitchProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 ToggleSwitch.displayName = 'ToggleSwitch';

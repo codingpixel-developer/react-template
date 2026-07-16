@@ -13,12 +13,12 @@ description: Rules for component size, naming conventions, file structure, TypeS
 
 If a component is growing beyond this limit, apply one or more of these strategies:
 
-| Strategy | How |
-|---|---|
-| Extract sub-components | Move sections into separate `*.tsx` files in the same folder |
-| Move logic to a hook | Extract `useState`, `useEffect`, handlers → `useYourFeature.ts` in `shared/lib/hooks/` |
-| Split large forms | Each field group becomes its own component file |
-| Extract utilities | Pure helper functions → `shared/lib/utils/` |
+| Strategy               | How                                                                                    |
+| ---------------------- | -------------------------------------------------------------------------------------- |
+| Extract sub-components | Move sections into separate `*.tsx` files in the same folder                           |
+| Move logic to a hook   | Extract `useState`, `useEffect`, handlers → `useYourFeature.ts` in `shared/lib/hooks/` |
+| Split large forms      | Each field group becomes its own component file                                        |
+| Extract utilities      | Pure helper functions → `shared/lib/utils/`                                            |
 
 ```
 // ❌ One giant file
@@ -130,9 +130,9 @@ className={`${styles.button} ${styles[`button--${variant}`]} ${disabled ? styles
 
 ---
 
-## Rule 7: Keep Functions Short — Split Instead of Branching
+## Rule 7: Function Size Limit (300–350 lines max)
 
-If a function is growing long due to `if/else` or conditional logic, split it into separate focused functions rather than one long branching function.
+**CRITICAL:** A single function must never exceed **300–350 lines**. If a function is growing large — whether from `if/else`/conditional logic or just doing too much — split it into smaller, focused functions. Several small functions are always preferred over one large 350-line function.
 
 ```typescript
 // ❌ One long function with branches

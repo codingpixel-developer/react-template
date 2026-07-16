@@ -17,7 +17,9 @@ export const ProtectedRoute = ({
   const location = useLocation();
 
   if (requireAuth && !isLoggedIn) {
-    return <Navigate to={ROUTES.LOGIN} state={{ from: location.pathname }} replace />;
+    return (
+      <Navigate to={ROUTES.LOGIN} state={{ from: location.pathname }} replace />
+    );
   }
 
   if (!requireAuth && isLoggedIn) {

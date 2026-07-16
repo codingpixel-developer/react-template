@@ -1,21 +1,21 @@
-import { useState } from "react";
-import { Link } from "react-router";
-import { Button } from "@/shared/components/ui/button/button";
-import { Alert } from "@/shared/components/ui/alert/alert";
-import { Badge } from "@/shared/components/ui/badge/badge";
-import { Spinner } from "@/shared/components/ui/spinner/spinner";
-import { Accordion } from "@/shared/components/ui/accordion/accordion";
-import { Tabs } from "@/shared/components/ui/tabs/tabs";
-import { Modal } from "@/shared/components/ui/modal/modal";
-import { Input } from "@/shared/components/ui/input/input";
-import { Tooltip } from "@/shared/components/ui/tooltip/tooltip";
-import { Checkbox } from "@/shared/components/ui/checkbox/checkbox";
-import { ToggleSwitch } from "@/shared/components/ui/toggleSwitch/toggleSwitch";
-import { TextArea } from "@/shared/components/ui/textArea/textArea";
-import { ThemeToggle } from "@/shared/components/ui/themeToggle/themeToggle";
-import { useToast } from "@/shared/components/ui/toast/toast";
-import { ROUTES } from "@/shared/lib/config/routes";
-import styles from "./home.module.scss";
+import { useState } from 'react';
+import { Link } from 'react-router';
+import { Button } from '@/shared/components/ui/button/button';
+import { Alert } from '@/shared/components/ui/alert/alert';
+import { Badge } from '@/shared/components/ui/badge/badge';
+import { Spinner } from '@/shared/components/ui/spinner/spinner';
+import { Accordion } from '@/shared/components/ui/accordion/accordion';
+import { Tabs } from '@/shared/components/ui/tabs/tabs';
+import { Modal } from '@/shared/components/ui/modal/modal';
+import { Input } from '@/shared/components/ui/input/input';
+import { Tooltip } from '@/shared/components/ui/tooltip/tooltip';
+import { Checkbox } from '@/shared/components/ui/checkbox/checkbox';
+import { ToggleSwitch } from '@/shared/components/ui/toggleSwitch/toggleSwitch';
+import { TextArea } from '@/shared/components/ui/textArea/textArea';
+import { ThemeToggle } from '@/shared/components/ui/themeToggle/themeToggle';
+import { useToast } from '@/shared/components/ui/toast/toast';
+import { ROUTES } from '@/shared/lib/config/routes';
+import styles from './home.module.scss';
 
 export function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -157,7 +157,7 @@ export function HomePage() {
 
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Accordion</h2>
-          <Accordion defaultExpanded={["faq-1"]} allowMultiple>
+          <Accordion defaultExpanded={['faq-1']} allowMultiple>
             <Accordion.Item id="faq-1">
               <Accordion.Trigger>What is this template?</Accordion.Trigger>
               <Accordion.Content>
@@ -254,9 +254,9 @@ export function HomePage() {
               variant="primary"
               onClick={() =>
                 addToast({
-                  title: "Success",
-                  description: "Your changes have been saved.",
-                  variant: "success",
+                  title: 'Success',
+                  description: 'Your changes have been saved.',
+                  variant: 'success',
                   duration: 4000,
                 })
               }
@@ -267,9 +267,9 @@ export function HomePage() {
               variant="secondary"
               onClick={() =>
                 addToast({
-                  title: "Info",
-                  description: "New update available.",
-                  variant: "info",
+                  title: 'Info',
+                  description: 'New update available.',
+                  variant: 'info',
                   duration: 4000,
                 })
               }
@@ -280,9 +280,9 @@ export function HomePage() {
               variant="outline"
               onClick={() =>
                 addToast({
-                  title: "Warning",
-                  description: "Your session expires in 5 minutes.",
-                  variant: "warning",
+                  title: 'Warning',
+                  description: 'Your session expires in 5 minutes.',
+                  variant: 'warning',
                   duration: 4000,
                 })
               }
@@ -293,9 +293,9 @@ export function HomePage() {
               variant="danger"
               onClick={() =>
                 addToast({
-                  title: "Error",
-                  description: "Failed to save changes.",
-                  variant: "error",
+                  title: 'Error',
+                  description: 'Failed to save changes.',
+                  variant: 'error',
                   duration: 4000,
                 })
               }

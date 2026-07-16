@@ -4,7 +4,8 @@ import { setToken, clearAuth } from '@/shared/lib/store/slices/authSlice';
 import { clearUser } from '@/shared/lib/store/slices/userSlice';
 import { ROUTES } from '@/shared/lib/config/routes';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
+const BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -60,7 +61,9 @@ axiosInstance.interceptors.response.use(
 
       try {
         const refreshToken = store.getState().auth.refreshToken;
-        const response = await axios.post(`${BASE_URL}/auth/refresh`, { refreshToken });
+        const response = await axios.post(`${BASE_URL}/auth/refresh`, {
+          refreshToken,
+        });
         const { token, refreshToken: newRefreshToken } = response.data;
 
         store.dispatch(setToken({ token, refreshToken: newRefreshToken }));
@@ -80,5 +83,5 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

@@ -10,6 +10,7 @@ description: Use when implementing login/logout, protecting routes, working with
 ## Overview
 
 Authentication is implemented across three layers:
+
 1. **`ProtectedRoute` component** — client-side route protection
 2. **Axios interceptor** — attaches tokens to requests, handles refresh
 3. **Redux auth slice** — persists login state client-side
@@ -21,6 +22,7 @@ Authentication is implemented across three layers:
 Located at `src/shared/components/providers/ProtectedRoute.tsx`.
 
 **Logic:**
+
 - Reads `token` from cookies via `storage.ts`
 - Unauthenticated user on a protected route → redirect to `/login`
 - Authenticated user on an auth route (e.g., `/login`) → redirect to `/dashboard`
@@ -60,6 +62,7 @@ Response 401 → queue pending requests (max 100)
 ```
 
 **Key behaviors:**
+
 - Token read from cookies via `storage.ts` utilities
 - A single refresh request is made even if multiple 401s occur simultaneously (queue pattern)
 - On refresh success: all queued requests are retried with the new token
@@ -112,9 +115,9 @@ Cookie helpers used by both the interceptor and auth slice:
 ```typescript
 import { storage } from '@/shared/lib/utils/storage';
 
-storage.getToken()           // Read token cookie
-storage.setToken(token)      // Write token cookie
-storage.clear()              // Remove all auth cookies
+storage.getToken(); // Read token cookie
+storage.setToken(token); // Write token cookie
+storage.clear(); // Remove all auth cookies
 ```
 
 Cookie `secure` flag is set based on `NODE_ENV`.
@@ -139,17 +142,18 @@ once the token cookie is present.
 
 Pre-built Yup schemas:
 
-| Schema | Use case |
-|---|---|
-| `loginSchema` | Email + password login |
-| `registerSchema` | Full registration |
-| `forgotPasswordSchema` | Email only |
-| `resetPasswordSchema` | New + confirm password |
-| `profileSchema` | Name, bio, etc. |
+| Schema                 | Use case               |
+| ---------------------- | ---------------------- |
+| `loginSchema`          | Email + password login |
+| `registerSchema`       | Full registration      |
+| `forgotPasswordSchema` | Email only             |
+| `resetPasswordSchema`  | New + confirm password |
+| `profileSchema`        | Name, bio, etc.        |
 | `changePasswordSchema` | Current + new password |
-| `contactSchema` | Name, email, message |
+| `contactSchema`        | Name, email, message   |
 
 ```typescript
 import { loginSchema } from '@/shared/lib/validations/schemas';
 // Use with Formik: validationSchema: loginSchema
+// Forms validate on blur + submit (set `validateOnChange: false`); show errors on `touched`.
 ```

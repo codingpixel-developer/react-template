@@ -27,5 +27,6 @@ const protectedSet = new Set<string>(PROTECTED_ROUTES);
 const authSet = new Set<string>(AUTH_ROUTES);
 
 export const isPublicRoute = (path: string): boolean => publicSet.has(path);
-export const isProtectedRoute = (path: string): boolean => protectedSet.has(path);
+export const isProtectedRoute = (path: string): boolean =>
+  protectedSet.has(path);
 export const isAuthRoute = (path: string): boolean => authSet.has(path);
