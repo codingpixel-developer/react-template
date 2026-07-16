@@ -22,6 +22,7 @@ npm run format    # Format with Prettier
 - **Tailwind CSS v4** + SCSS modules (hybrid styling)
 - **Redux Toolkit** + redux-persist
 - **React Router v7** · Formik + Yup · Axios
+- **TanStack Query** — server state / data fetching. `queryClient` in `src/shared/lib/query/`, `QueryClientProvider` wraps the app in `main.tsx`. Use `useQuery`/`useMutation` (with Axios) in components.
 
 All shared code lives under `src/shared/`. Use `@/shared/` for all imports from shared folders.
 
@@ -31,18 +32,18 @@ All shared code lives under `src/shared/`. Use `@/shared/` for all imports from 
 
 Load the appropriate skill file for your task. Each file is self-contained and focused.
 
-| Task                                                          | Skill file                        |
-| ------------------------------------------------------------- | --------------------------------- |
-| Understand project structure, add pages, configure Vite       | `.claude/skills/architecture/SKILL.md`          |
-| Use or create UI components (Button, Modal, Input, etc.)      | `.claude/skills/components/SKILL.md`            |
-| Apply styles, work with CSS variables, Tailwind, SCSS         | `.claude/skills/styling/SKILL.md`               |
-| Implement auth, protect routes, work with tokens/API          | `.claude/skills/auth/SKILL.md`                  |
-| Add Redux state, create slices, use hooks                     | `.claude/skills/state/SKILL.md`                 |
-| Navigate between pages, add new routes, update access control | `.claude/skills/routes/SKILL.md`                |
-| Add error boundaries, customize error fallback UI, wire error reporting | `.claude/skills/error-handling/SKILL.md`        |
-| Follow naming conventions and component size rules            | `.claude/rules/code-standards/SKILL.md`         |
-| Add images/icons/fonts, use standard image handling           | `.claude/rules/assets/SKILL.md`                 |
-| Create a GitHub Actions workflow to build + deploy via SSH    | `.claude/skills/github-workflow-deploy/SKILL.md` |
+| Task                                                                    | Skill file                                       |
+| ----------------------------------------------------------------------- | ------------------------------------------------ |
+| Understand project structure, add pages, configure Vite                 | `.claude/skills/architecture/SKILL.md`           |
+| Use or create UI components (Button, Modal, Input, etc.)                | `.claude/skills/components/SKILL.md`             |
+| Apply styles, work with CSS variables, Tailwind, SCSS                   | `.claude/skills/styling/SKILL.md`                |
+| Implement auth, protect routes, work with tokens/API                    | `.claude/skills/auth/SKILL.md`                   |
+| Add Redux state, create slices, use hooks                               | `.claude/skills/state/SKILL.md`                  |
+| Navigate between pages, add new routes, update access control           | `.claude/skills/routes/SKILL.md`                 |
+| Add error boundaries, customize error fallback UI, wire error reporting | `.claude/skills/error-handling/SKILL.md`         |
+| Follow naming conventions and component size rules                      | `.claude/rules/code-standards/SKILL.md`          |
+| Add images/icons/fonts, use standard image handling                     | `.claude/rules/assets/SKILL.md`                  |
+| Create a GitHub Actions workflow to build + deploy via SSH              | `.claude/skills/github-workflow-deploy/SKILL.md` |
 
 ---
 
