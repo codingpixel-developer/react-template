@@ -22,34 +22,39 @@ All UI primitives live in `src/shared/components/ui/`.
 ## Available Components
 
 ### Layout & Navigation
-| Component | Import path | Key props |
-|---|---|---|
-| `Accordion` | `ui/accordion/accordion` | `defaultExpanded`, `allowMultiple` |
-| `Modal` | `ui/modal/modal` | `isOpen`, `onClose`, `size` |
-| `Tabs` | `ui/tabs/tabs` | `defaultTab` |
+
+| Component    | Import path                | Key props                                   |
+| ------------ | -------------------------- | ------------------------------------------- |
+| `Accordion`  | `ui/accordion/accordion`   | `defaultExpanded`, `allowMultiple`          |
+| `Modal`      | `ui/modal/modal`           | `isOpen`, `onClose`, `size`                 |
+| `Tabs`       | `ui/tabs/tabs`             | `defaultTab`                                |
 | `Pagination` | `ui/pagination/pagination` | `currentPage`, `totalPages`, `onPageChange` |
 
 ### Forms & Inputs
-| Component | Import path | Key props |
-|---|---|---|
-| `Button` | `ui/button/button` | `variant`, `size`, `loading`, `disabled` |
-| `Input` | `ui/input/input` | `label`, `error`, `helpText`, `leftIcon`, `rightIcon` |
-| `TextArea` | `ui/textArea/textArea` | `label`, `rows`, `maxLength`, `showCount`, `resize` |
-| `Checkbox` | `ui/checkbox/checkbox` | `label`, `checked`, `indeterminate`, `onChange` |
-| `ToggleSwitch` | `ui/toggleSwitch/toggleSwitch` | `label`, `checked`, `onChange` |
-| `PhoneInput` | `ui/phoneInput/phoneInput` | `value`, `onChange`, `defaultCountry`, `label` |
-| `FileUpload` | `ui/fileUpload/fileUpload` | `multiple`, `maxFiles`, `maxSize`, `accept`, `onFilesChange` |
-| `Dropdown` | `ui/dropdown/dropdown` | `trigger`, children |
+
+| Component      | Import path                    | Key props                                                                          |
+| -------------- | ------------------------------ | ---------------------------------------------------------------------------------- |
+| `Button`       | `ui/button/button`             | `variant`, `size`, `loading`, `disabled`                                           |
+| `DatePicker`   | `ui/datePicker/datePicker`     | `label`, `value`, `onChange`, `minDate`, `maxDate`                                 |
+| `TimePicker`   | `ui/timePicker/timePicker`     | `label`, `value`, `onChange`, `minTime`, `maxTime`, `minuteStep`                   |
+| `Input`        | `ui/input/input`               | `label`, `error`, `helpText`, `leftIcon`, `rightIcon`                              |
+| `TextArea`     | `ui/textArea/textArea`         | `label`, `rows`, `maxLength`, `showCount`, `resize`                                |
+| `Checkbox`     | `ui/checkbox/checkbox`         | `label`, `checked`, `indeterminate`, `onChange`                                    |
+| `ToggleSwitch` | `ui/toggleSwitch/toggleSwitch` | `label`, `checked`, `onChange`                                                     |
+| `PhoneInput`   | `ui/phoneInput/phoneInput`     | `value`, `onChange`, `defaultCountry`, `label`                                     |
+| `FileUpload`   | `ui/fileUpload/fileUpload`     | `multiple`, `maxFiles`, `maxSize`, `accept`, `onFilesChange`                       |
+| `Dropdown`     | `ui/dropdown/dropdown`         | `label`, `items` or `loadOptions` + `queryKey`, `selectedItem`, `onSelect`, `mode` |
 
 ### Feedback & Display
-| Component | Import path | Key props |
-|---|---|---|
-| `Alert` | `ui/alert/alert` | `variant`, `title`, `onClose` |
-| `Badge` | `ui/badge/badge` | `variant`, `size`, `pill` |
-| `Tooltip` | `ui/tooltip/tooltip` | `content`, `position` |
-| `Spinner` | `ui/spinner/spinner` | `size`, `variant` |
+
+| Component       | Import path                      | Key props                                |
+| --------------- | -------------------------------- | ---------------------------------------- |
+| `Alert`         | `ui/alert/alert`                 | `variant`, `title`, `onClose`            |
+| `Badge`         | `ui/badge/badge`                 | `variant`, `size`, `pill`                |
+| `Tooltip`       | `ui/tooltip/tooltip`             | `content`, `position`                    |
+| `Spinner`       | `ui/spinner/spinner`             | `size`, `variant`                        |
 | `NoContentCard` | `ui/noContentCard/noContentCard` | `title`, `description`, `action`, `icon` |
-| `Toast` | `ui/toast/toast` | via `useToast()` hook + `ToastProvider` |
+| `Toast`         | `ui/toast/toast`                 | via `useToast()` hook + `ToastProvider`  |
 
 ---
 
@@ -154,17 +159,52 @@ import { Checkbox } from '@/shared/components/ui/checkbox/checkbox';
 
 ### Dropdown
 
-```typescript
-import { Dropdown } from '@/shared/components/ui/dropdown/dropdown';
-import { Button } from '@/shared/components/ui/button/button';
+Use this single component for all selection dropdowns and action menus. Do not create separate searchable selects or page-specific menus.
 
-<Dropdown trigger={<Button variant="outline">Options</Button>}>
-  <Dropdown.Item onClick={handleEdit}>Edit</Dropdown.Item>
-  <Dropdown.Item onClick={handleDuplicate}>Duplicate</Dropdown.Item>
-  <Dropdown.Divider />
-  <Dropdown.Item destructive onClick={handleDelete}>Delete</Dropdown.Item>
-</Dropdown>
+**Required for paginated APIs:** Use remote mode (`loadOptions` + `queryKey`) and infinite scrolling to load subsequent pages with the API's normal page size. Never use oversized limits such as `limit: 100` or `limit: 200` to avoid pagination, and never eagerly fetch every page into static `items`. Supply an existing selection through `selectedItem`; do not increase the limit to find it. Determine `hasMore` from the API's pagination metadata so every available page remains reachable.
+
+```tsx
+import { Dropdown } from '@/shared/components/ui/dropdown/dropdown';
+
+<Dropdown
+  label="Assignee"
+  items={people}
+  selectedItem={assignee}
+  onSelect={setAssignee}
+/>
+
+<Dropdown
+  label="Assignee"
+  queryKey={['people', organizationId]}
+  loadOptions={async ({ search, page, signal }) => {
+    const response = await peopleApi.list({ search, page, signal });
+    return { items: response.items, hasMore: response.hasMore };
+  }}
+  selectedItem={assignee}
+  onSelect={setAssignee}
+/>
+
+<Dropdown
+  mode="action"
+  label="Actions"
+  searchable={false}
+  items={[
+    { id: 'edit', label: 'Edit' },
+    { id: 'delete', label: 'Delete', destructive: true, dividerBefore: true },
+  ]}
+  onSelect={handleAction}
+/>
 ```
+
+Items require a stable `id` (string or number) and a text `label`; additional fields are preserved in `onSelect`. Optional flags: `disabled`, `destructive`, `dividerBefore`; optional content: `leftIcon`, `rightIcon`.
+
+- `mode="select"` is the default. `selectedItem` is controlled by the caller and may be null. Action mode does not accept a selection.
+- A selection absent from page one is prepended and filtered from subsequent pages. Other duplicate IDs are also removed. A selection present on page one keeps its position. The current selection stays visible during search.
+- Search is enabled by default. Static items filter locally. Remote search is debounced by 300 ms, resets to page one and handles composition and stale requests.
+- Remote mode requires the existing QueryClientProvider. Include dataset/filter/permission scope in `queryKey`, and pass `signal` to the request. Convert API records to `{ id, label, ... }` in `loadOptions`; map pagination metadata to `hasMore`.
+- Infinite scrolling and a keyboard-accessible Load more fallback fetch additional pages. Failure retains loaded options and offers Retry.
+- `trigger` is optional non-interactive content inside the component's own button. Do not pass a Button, link or other interactive child. The former `Dropdown.Item`, `Dropdown.Divider` and `Dropdown.Header` API is replaced by items.
+- User-visible search, loading, empty, retry and error messages can be supplied through props. Styling uses existing theme variables and SCSS modules.
 
 ### FileUpload
 
@@ -319,3 +359,21 @@ Follow this checklist:
 7. Export the component as a named export (not default)
 8. Add to this skills file under the appropriate category
 9. Add demo to `src/pages/home/home.tsx` homepage showcase if applicable
+
+### DatePicker and TimePicker — required shared components
+
+Use these wrappers for every date or time entry. Native `<input type="date">`, `<input type="time">`, `<input type="datetime-local">`, equivalent generic Input props, and direct `react-datepicker` imports outside the wrappers are forbidden. Compose the two wrappers when both a date and a time are needed.
+
+```tsx
+import { DatePicker } from '@/shared/components/ui/datePicker/datePicker';
+import { TimePicker } from '@/shared/components/ui/timePicker/timePicker';
+
+<DatePicker label="Start date" value={date} onChange={setDate} minDate="2026-01-01" />
+<TimePicker label="Start time" value={time} onChange={setTime} minTime="09:00" maxTime="17:00" minuteStep={15} />
+```
+
+- Values and bounds use `YYYY-MM-DD` or `HH:mm` respectively. `onChange` reports a string or null when cleared. Dates and times have no timezone; resolve any scheduling timezone in the application layer.
+- Both support `id`, `name`, `required`, `disabled`, `readOnly`, `error`, `helpText`, `placeholder`, `onBlur`, `clearable`, `clearLabel`, `className` and the package's `locale` prop. `label` is required.
+- DatePicker supports independent `minDate` and `maxDate` bounds. TimePicker supports independent same-day `minTime` and `maxTime` bounds, `minuteStep` (default 15, valid integers 1–60), and `timeCaption`.
+- Time lists use 24-hour display. Typing permits any valid minute within bounds; `minuteStep` controls the suggested list intervals.
+- Styles come from the shared dateTimePicker SCSS module and existing theme variables. Do not create page-specific picker implementations.
