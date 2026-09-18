@@ -67,3 +67,15 @@ The `.prompts/` folder contains detailed prompts for complex, multi-step tasks. 
 6. **Imports** — Always use `@/shared/` prefix for shared code. Never use relative `../../` paths.
 7. **Modals & Dialogs** — Always create modals and dialogs as separate, dedicated components. Never define modal JSX inline inside a page or parent component. Place them in the same feature folder (e.g., `pages/users/deleteUserModal/deleteUserModal.tsx`) or in `src/shared/components/` if reusable.
 8. **Error boundaries** — The app is wrapped in `ErrorBoundary` (`src/shared/components/providers/ErrorBoundary.tsx`). Wrap risky subtrees with it; catch event-handler/async errors locally and surface via toast (boundaries don't catch those).
+
+## Shared Dropdown
+
+**Required API pagination rule:** When a dropdown fetches options from a paginated API, use the shared `Dropdown` with `loadOptions`, `queryKey`, and infinite scrolling to fetch subsequent pages. Keep the API's normal page size. Never bypass pagination by requesting an oversized limit such as `100` or `200`, or by eagerly fetching every page. Pass an existing selection through `selectedItem` instead of increasing the limit to include it.
+
+Use `Dropdown` for every selection dropdown and action menu. It accepts typed items or a paginated `loadOptions` callback, supports search and infinite scrolling, and preserves the controlled `selectedItem` without duplicates. Use `mode="action"` for commands. See the components skill for the API and examples. Run `npm test` for dropdown interaction tests.
+
+## Date and Time Pickers
+
+Always use the shared `DatePicker` (`ui/datePicker/datePicker`) for dates and `TimePicker` (`ui/timePicker/timePicker`) for times. Never use native `input` types `date`, `time`, or `datetime-local`, including through the generic Input component. For a date plus time, compose both shared pickers. Never import `react-datepicker` directly outside the shared wrappers. ESLint enforces literal native-input and direct-package-import restrictions.
+
+Both components use controlled string values (`YYYY-MM-DD` for dates, `HH:mm` for times) or null. Do not convert date-only values through UTC timestamps. See the components skill for props and examples.

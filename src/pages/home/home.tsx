@@ -15,6 +15,8 @@ import { TextArea } from '@/shared/components/ui/textArea/textArea';
 import { ThemeToggle } from '@/shared/components/ui/themeToggle/themeToggle';
 import { useToast } from '@/shared/components/ui/toast/toast';
 import { ROUTES } from '@/shared/lib/config/routes';
+import { DropdownExamples } from './dropdownExamples';
+import { DateTimePickerExamples } from './dateTimePickerExamples';
 import styles from './home.module.scss';
 
 export function HomePage() {
@@ -153,6 +155,16 @@ export function HomePage() {
               onChange={(e) => setToggled(e.target.checked)}
             />
           </div>
+        </section>
+
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Dropdown</h2>
+          <DropdownExamples />
+        </section>
+
+        <section className={styles.section}>
+          <h2 className={styles.sectionTitle}>Date and time pickers</h2>
+          <DateTimePickerExamples />
         </section>
 
         <section className={styles.section}>
