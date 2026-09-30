@@ -4,17 +4,17 @@
 
 ---
 
-## Before Anything Else — Read `CLAUDE.md`
+## Before Anything Else — Read `AGENTS.md`
 
-**The very first action** the agent must take is to read `CLAUDE.md` from the project root:
+**The very first action** the agent must take is to read `AGENTS.md` from the project root:
 
 ```
-CLAUDE.md    ← read this first, before any code, before any questions
+AGENTS.md    ← read this first, before any code, before any questions
 ```
 
-`CLAUDE.md` contains the general project overview, the full list of available skills, project-wide rules, and conventions the agent must follow throughout this task. Everything in `CLAUDE.md` takes precedence over any defaults in this prompt.
+`AGENTS.md` contains the general project overview, the full list of available skills, project-wide rules, and conventions the agent must follow throughout this task. Everything in `AGENTS.md` takes precedence over any defaults in this prompt.
 
-Only after reading and internalizing `CLAUDE.md` should the agent proceed to Step 1 below.
+Only after reading and internalizing `AGENTS.md` should the agent proceed to Step 1 below.
 
 ---
 
@@ -71,14 +71,14 @@ The following are **fixed** for this project. The agent must not ask the user ab
 | **Framework**                 | React.js (no SSR/Next.js unless explicitly told)                                                         |
 | **Styling**                   | Tailwind CSS                                                                                             |
 | **Component approach**        | Reuse existing components first; create new custom components only when needed for the requested screens |
-| **Skills/conventions source** | `.claude/skills/` folder in the project root                                                              |
+| **Skills/conventions source** | `.claude/skills/` folder in the project root                                                             |
 
 #### Reading the Skills Folder
 
 **Before writing any code**, the agent must read the project's skills files to understand structure and conventions:
 
-| Task                                                          | Skill file                        |
-| ------------------------------------------------------------- | --------------------------------- |
+| Task                                                          | Skill file                         |
+| ------------------------------------------------------------- | ---------------------------------- |
 | Understand project structure, add pages, configure Vite       | `.claude/skills/architecture.md`   |
 | Use or create UI components (Button, Modal, Input, etc.)      | `.claude/skills/components.md`     |
 | Apply styles, work with CSS variables, Tailwind, SCSS         | `.claude/skills/styling.md`        |

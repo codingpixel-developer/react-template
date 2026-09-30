@@ -10,21 +10,22 @@ description: Use when creating or updating a GitHub Actions workflow that builds
 React Vite produces a static `dist/` folder. No server runtime or container needed — nginx on the Ubuntu server serves the files directly.
 
 The workflow is a single job that:
+
 1. Sets up SSH and fetches `.env` from the server
 2. Installs deps and builds with `npm run build`
 3. Backs up the existing `.env` on the server
 4. Deploys `dist/` via SCP
 5. Restores `.env` and fixes file permissions
 
-## Step 1: Ask the User
+## Step 1: Resolve Deployment Details
 
-Before writing any workflow, ask these three questions one at a time:
+Read existing deployment files and project configuration first. Ask for any missing values together:
 
 1. **Target environment** — staging or production?
 2. **Deploy path on server** — where should `dist/` be placed? (e.g. `/var/www/my-app`)
 3. **App name** — used for the workflow name (e.g. `my-app`)
 
-Use the answers to fill in the placeholders below.
+Use the resolved values to fill in the placeholders below.
 
 | Answer     | Branch trigger | GitHub Environment name | Deploy path       |
 | ---------- | -------------- | ----------------------- | ----------------- |
@@ -65,8 +66,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
-          cache: "npm"
+          node-version: '22'
+          cache: 'npm'
 
       - name: Setup SSH key
         run: |
@@ -148,7 +149,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SERVER_PORT || 22 }}
-          source: "dist/*"
+          source: 'dist/*'
           target: ${{ env.DEPLOY_PATH }}
           strip_components: 1
           rm: false
@@ -181,12 +182,12 @@ jobs:
 
 Set up under **Settings → Environments → `<environment>` → Secrets**:
 
-| Secret            | Description                                                    |
-| ----------------- | -------------------------------------------------------------- |
+| Secret            | Description                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------ |
 | `SSH_HOST`        | IP address or hostname of the server (also used as `SERVER_HOST` — pick one name and use consistently) |
-| `SSH_USER`        | Linux username for SSH (also `SERVER_USER`)                    |
-| `SSH_PRIVATE_KEY` | Full contents of the private SSH key                           |
-| `SSH_PORT`        | SSH port — optional, defaults to `22`                          |
+| `SSH_USER`        | Linux username for SSH (also `SERVER_USER`)                                                            |
+| `SSH_PRIVATE_KEY` | Full contents of the private SSH key                                                                   |
+| `SSH_PORT`        | SSH port — optional, defaults to `22`                                                                  |
 
 > Keep `.env` on the server at `<DEPLOY_PATH>/.env`. The workflow fetches it before building so env vars are baked into the Vite bundle.
 
@@ -242,18 +243,18 @@ sudo systemctl reload nginx
 
 ## Common Mistakes
 
-| Mistake                                         | Fix                                                                              |
-| ----------------------------------------------- | -------------------------------------------------------------------------------- |
-| Forgetting `try_files $uri /index.html`         | SPA routes return 404 without it — always include in nginx config                |
-| `.env` not present on server before first deploy | Place it manually once; workflow fetches it on every subsequent run             |
-| `DEPLOY_PATH` not owned by `SERVER_USER`        | `sudo chown -R <SERVER_USER>:<SERVER_USER> <DEPLOY_PATH>` on the server          |
-| `CI: false` removed from build step             | Vite warnings treated as errors in CI mode will fail the build — keep it         |
-| Forgetting `environment:` on the job            | Without it, GitHub uses repo-level secrets, not environment-scoped ones          |
+| Mistake                                          | Fix                                                                      |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| Forgetting `try_files $uri /index.html`          | SPA routes return 404 without it — always include in nginx config        |
+| `.env` not present on server before first deploy | Place it manually once; workflow fetches it on every subsequent run      |
+| `DEPLOY_PATH` not owned by `SERVER_USER`         | `sudo chown -R <SERVER_USER>:<SERVER_USER> <DEPLOY_PATH>` on the server  |
+| `CI: false` removed from build step              | Vite warnings treated as errors in CI mode will fail the build — keep it |
+| Forgetting `environment:` on the job             | Without it, GitHub uses repo-level secrets, not environment-scoped ones  |
 
 ## File Creation
 
-After all questions are answered and placeholders are filled in, write the workflow file:
+After resolving the values and placeholders, write the workflow file:
 
 - **`.github/workflows/deploy-<environment>.yml`** — the full workflow above with all placeholders replaced
 
-Use the Write tool. Create the `.github/workflows/` directory if it does not exist.
+Use available file editing tools. Create the `.github/workflows/` directory if needed. Check workflow syntax and report the result.
