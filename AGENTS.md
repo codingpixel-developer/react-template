@@ -57,7 +57,7 @@ The `.prompts/` folder contains detailed prompts for complex, multi-step tasks. 
 
 ---
 
-## Critical Rules (always apply, regardless of task)
+## Rules
 
 1. **Routes** — Never hardcode route strings. Always use `ROUTES.*` from `src/shared/lib/config/routes.ts`.
 2. **Assets** — Never reference asset paths directly. All app assets (icons, images, fonts) live in `src/shared/assets/`. Export from `src/shared/assets/*/index.ts` first. Only favicons and static files served at the root go in `public/`.
